@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B4F9E">
+  <meta name="description" content="MONIKA SPKRT 2027 - Monitoring Komoditas SPKRT">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>MONIKA SPKRT 2027</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <style>
+    :root{color-scheme:light;font-family:system-ui,-apple-system,Roboto,sans-serif;background:#eef3f8;color:#182536}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+    .app{height:100%;height:100dvh;display:flex;flex-direction:column}
+    header{height:48px;flex:0 0 48px;background:#0B4F9E;color:#fff;display:flex;align-items:center;gap:10px;padding:0 14px;font-weight:700;letter-spacing:.2px}
+    header img{width:27px;height:27px}header small{font-weight:400;opacity:.85;margin-left:auto;font-size:11px}
+    main{flex:1;min-height:0;position:relative;background:#f3f6fa}
+    iframe{display:block;border:0;width:100%;height:100%;background:#f3f6fa}
+    .notice{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;background:#f3f6fa;z-index:2}
+    .notice[hidden]{display:none}.panel{max-width:420px;background:white;border:1px solid #d9e1ec;border-radius:16px;padding:22px;box-shadow:0 8px 28px #173b6314}
+    .panel h1{font-size:19px;margin:0 0 8px}.panel p{font-size:14px;line-height:1.5;color:#526174}.panel button{background:#0B4F9E;color:white;border:0;border-radius:10px;padding:12px 18px;font-size:14px;font-weight:650}
+    footer{font-size:10px;color:#637187;text-align:center;padding:4px;background:#fff;border-top:1px solid #e0e6ee}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header><img src="./icons/icon-192.png" alt=""><span>MONIKA SPKRT 2027</span><small>APLIKASI PML</small></header>
+  <main>
+    <div id="notice" class="notice"><div class="panel">
+      <h1>MONIKA belum dikonfigurasi</h1>
+      <p>Admin perlu mengisi URL Web App Google Apps Script pada berkas <b>config.js</b>, lalu menerbitkan ulang PWA.</p>
+    </div></div>
+    <iframe id="appFrame" title="Aplikasi MONIKA SPKRT 2027" allow="clipboard-read; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </main>
+  <footer>MONIKA SPKRT 2027 • Memerlukan koneksi internet</footer>
+</div>
+<script src="./config.js"></script>
+<script>
+(() => {
+  const url = window.MONIKA_CONFIG && window.MONIKA_CONFIG.GAS_WEB_APP_URL;
+  const notice = document.getElementById('notice');
+  const frame = document.getElementById('appFrame');
+  if (url && /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url)) {
+    frame.src = url;
+    notice.hidden = true;
+  }
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  }
+})();
+</script>
+</body>
+</html>
